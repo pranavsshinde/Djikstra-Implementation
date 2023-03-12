@@ -2,6 +2,7 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+import time
 #Creating Workspace
 workspace = np.zeros((250,600),dtype=np.float64)
 workspace[workspace==0] = 1e+50
@@ -102,6 +103,7 @@ node = start
 
 #Initializing video
 out = cv2.VideoWriter('Project2.avi',cv2.VideoWriter_fourcc(*'DIVX'),400,(display.shape[1], display.shape[0]))
+start_time = time.time()
 #Djikstra Algorithm
 while node != goal:
     Openlist = dict(sorted(Openlist.items(), key=lambda item: item[1]))
@@ -144,3 +146,6 @@ for n in path:
 cv2.imshow("Djikstra Visualization", np.flipud(display))
 cv2.waitKey(0)
 out.release()
+
+end = time.time()
+print(end - start_time)
